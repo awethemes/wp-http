@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "86747a029a3fa136b9109217d87814b2",
+    "content-hash": "47a27791920cb975c631c75f71da48d9",
     "packages": [
         {
             "name": "mpociot/pipeline",
@@ -204,6 +204,56 @@
                 "shim"
             ],
             "time": "2017-10-11T12:05:26+00:00"
+        },
+        {
+            "name": "tightenco/collect",
+            "version": "v5.5.20",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tightenco/collect.git",
+                "reference": "ea6c2f9df3786d0997f34ef4f12e66bba85774c3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tightenco/collect/zipball/ea6c2f9df3786d0997f34ef4f12e66bba85774c3",
+                "reference": "ea6c2f9df3786d0997f34ef4f12e66bba85774c3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~1.0",
+                "phpunit/phpunit": "~6.0"
+            },
+            "suggest": {
+                "symfony/var-dumper": "Required to prettify dd() and dump() (~3.3)."
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/Illuminate/Support/helpers.php"
+                ],
+                "psr-4": {
+                    "Illuminate\\": "src/Illuminate"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylorotwell@gmail.com"
+                }
+            ],
+            "description": "Collect - Illuminate Collections as a separate package.",
+            "keywords": [
+                "collection",
+                "laravel"
+            ],
+            "time": "2017-11-09T17:52:28+00:00"
         }
     ],
     "packages-dev": [
@@ -1826,7 +1876,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.5.9"
+        "php": ">=5.6.4"
     },
     "platform-dev": []
 }
