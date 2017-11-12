@@ -1,0 +1,36 @@
+{
+    "name": "awethemes/wp-http",
+    "description": "The Missing WordPress HTTP Foundation",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "awethemes",
+            "email": "support@awethemes.com"
+        },
+        {
+            "name": "Nguyen Van Anh",
+            "email": "anhskohbo@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Awethemes\\Http\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.5.9",
+        "mpociot/pipeline": "^1.0",
+        "nikic/fast-route": "^1.2",
+        "symfony/http-foundation": "^2.0|^3.0"
+    },
+    "require-dev": {
+        "10up/wp_mock": "^0.2.0",
+        "symfony/debug": "^2.0|^3.0"
+    },
+    "suggest": {
+        "symfony/debug": "Better debug on your code.",
+        "monolog/monolog": "Allows more advanced logging of the application flow."
+    }
+}
