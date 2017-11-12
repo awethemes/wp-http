@@ -2,7 +2,7 @@
 
 use Awethemes\Http\Exception;
 
-class Http_Exception_Test extends \WP_UnitTestCase {
+class Exception_Test extends \WP_UnitTestCase {
 	/**
 	 * Asserts that a HTTP Exception is built correctly when thrown
 	 *
