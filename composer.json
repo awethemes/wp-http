@@ -24,7 +24,8 @@
         "mpociot/pipeline": "^1.0",
         "nikic/fast-route": "^1.2",
         "symfony/http-foundation": "^2.0|^3.0",
-        "tightenco/collect": "5.4.*|5.5.*"
+        "tightenco/collect": "5.4.*|5.5.*",
+        "awethemes/wp-session": "dev-master"
     },
     "require-dev": {
         "10up/wp_mock": "^0.2.0",

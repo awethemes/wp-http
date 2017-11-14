@@ -4,8 +4,52 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "47a27791920cb975c631c75f71da48d9",
+    "content-hash": "dc3555532de5599d9b5fbfc7333e6d9c",
     "packages": [
+        {
+            "name": "awethemes/wp-session",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/awethemes/wp-session.git",
+                "reference": "deabca25bb3510b8d29cfa6d15ce464778365e2a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/awethemes/wp-session/zipball/deabca25bb3510b8d29cfa6d15ce464778365e2a",
+                "reference": "deabca25bb3510b8d29cfa6d15ce464778365e2a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.4",
+                "tightenco/collect": "5.4.*|5.5.*"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Awethemes\\WP_Session\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nguyen Van Anh",
+                    "email": "anhskohbo@gmail.com"
+                },
+                {
+                    "name": "awethemes",
+                    "email": "support@awethemes.com"
+                }
+            ],
+            "description": "The missing Session Manager for WordPress",
+            "time": "2017-09-25T17:36:04+00:00"
+        },
         {
             "name": "mpociot/pipeline",
             "version": "1.0.2",
@@ -1872,7 +1916,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "awethemes/wp-session": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
