@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "dc3555532de5599d9b5fbfc7333e6d9c",
+    "content-hash": "02450aa8a889296f19994721aabbad7e",
     "packages": [
         {
             "name": "awethemes/wp-session",
@@ -12,17 +12,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/awethemes/wp-session.git",
-                "reference": "deabca25bb3510b8d29cfa6d15ce464778365e2a"
+                "reference": "4f786bc2a554343653a8fc95e1a80f148beac62a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/awethemes/wp-session/zipball/deabca25bb3510b8d29cfa6d15ce464778365e2a",
-                "reference": "deabca25bb3510b8d29cfa6d15ce464778365e2a",
+                "url": "https://api.github.com/repos/awethemes/wp-session/zipball/4f786bc2a554343653a8fc95e1a80f148beac62a",
+                "reference": "4f786bc2a554343653a8fc95e1a80f148beac62a",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.6.4",
-                "tightenco/collect": "5.4.*|5.5.*"
+                "tightenco/collect": "5.4.*"
             },
             "require-dev": {
                 "mockery/mockery": "^0.9.9"
@@ -48,7 +48,7 @@
                 }
             ],
             "description": "The missing Session Manager for WordPress",
-            "time": "2017-09-25T17:36:04+00:00"
+            "time": "2017-11-15T07:52:04+00:00"
         },
         {
             "name": "mpociot/pipeline",
@@ -139,16 +139,16 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v3.3.11",
+            "version": "v3.3.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "873ccdf8c1cae20da0184862820c434e20fdc8ce"
+                "reference": "5943f0f19817a7e05992d20a90729b0dc93faf36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/873ccdf8c1cae20da0184862820c434e20fdc8ce",
-                "reference": "873ccdf8c1cae20da0184862820c434e20fdc8ce",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/5943f0f19817a7e05992d20a90729b0dc93faf36",
+                "reference": "5943f0f19817a7e05992d20a90729b0dc93faf36",
                 "shasum": ""
             },
             "require": {
@@ -188,7 +188,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2017-11-05T19:07:00+00:00"
+            "time": "2017-11-13T18:13:16+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -251,27 +251,24 @@
         },
         {
             "name": "tightenco/collect",
-            "version": "v5.5.20",
+            "version": "v5.4.33",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tightenco/collect.git",
-                "reference": "ea6c2f9df3786d0997f34ef4f12e66bba85774c3"
+                "reference": "73aa38b20d932f5e8f8ccf721e4c27f4304783d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tightenco/collect/zipball/ea6c2f9df3786d0997f34ef4f12e66bba85774c3",
-                "reference": "ea6c2f9df3786d0997f34ef4f12e66bba85774c3",
+                "url": "https://api.github.com/repos/tightenco/collect/zipball/73aa38b20d932f5e8f8ccf721e4c27f4304783d6",
+                "reference": "73aa38b20d932f5e8f8ccf721e4c27f4304783d6",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.0"
+                "php": ">=5.6.4"
             },
             "require-dev": {
-                "mockery/mockery": "~1.0",
-                "phpunit/phpunit": "~6.0"
-            },
-            "suggest": {
-                "symfony/var-dumper": "Required to prettify dd() and dump() (~3.3)."
+                "mockery/mockery": "^0.9.7",
+                "phpunit/phpunit": "^5.7"
             },
             "type": "library",
             "autoload": {
@@ -297,7 +294,7 @@
                 "collection",
                 "laravel"
             ],
-            "time": "2017-11-09T17:52:28+00:00"
+            "time": "2017-08-14T20:47:19+00:00"
         }
     ],
     "packages-dev": [
@@ -1053,16 +1050,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.7.23",
+            "version": "5.7.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "78532d5269d984660080d8e0f4c99c5c2ea65ffe"
+                "reference": "4b1c822a68ae6577df38a59eb49b046712ec0f6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/78532d5269d984660080d8e0f4c99c5c2ea65ffe",
-                "reference": "78532d5269d984660080d8e0f4c99c5c2ea65ffe",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/4b1c822a68ae6577df38a59eb49b046712ec0f6a",
+                "reference": "4b1c822a68ae6577df38a59eb49b046712ec0f6a",
                 "shasum": ""
             },
             "require": {
@@ -1087,7 +1084,7 @@
                 "sebastian/object-enumerator": "~2.0",
                 "sebastian/resource-operations": "~1.0",
                 "sebastian/version": "~1.0.3|~2.0",
-                "symfony/yaml": "~2.1|~3.0"
+                "symfony/yaml": "~2.1|~3.0|~4.0"
             },
             "conflict": {
                 "phpdocumentor/reflection-docblock": "3.0.2"
@@ -1131,7 +1128,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-10-15T06:13:55+00:00"
+            "time": "2017-11-14T14:50:51+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -1754,7 +1751,7 @@
         },
         {
             "name": "symfony/debug",
-            "version": "v3.3.11",
+            "version": "v3.3.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
@@ -1810,7 +1807,7 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.3.11",
+            "version": "v3.3.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
