@@ -28,11 +28,18 @@ class Kernel {
 	protected $logger;
 
 	/**
-	 * The application's middleware stack.
+	 * Custom request_uri instead get from request.
 	 *
-	 * @var array
+	 * @var string
 	 */
-	protected $middleware = [];
+	protected $request_uri;
+
+	/**
+	 * The FastRoute Dispatcher instance.
+	 *
+	 * @var \FastRoute\Dispatcher
+	 */
+	protected $dispatcher;
 
 	/**
 	 * The current route being dispatched.
@@ -40,6 +47,13 @@ class Kernel {
 	 * @var array
 	 */
 	protected $current_route;
+
+	/**
+	 * The application's middleware stack.
+	 *
+	 * @var array
+	 */
+	protected $middleware = [];
 
 	/**
 	 * Create a new HTTP kernel instance.
@@ -87,6 +101,30 @@ class Kernel {
 	}
 
 	/**
+	 * Uses custom request_uri instead get from request.
+	 *
+	 * @param  string $request_uri Custom request uri.
+	 * @return $this
+	 */
+	public function use_request_uri( $request_uri ) {
+		$this->request_uri = $request_uri;
+
+		return $this;
+	}
+
+	/**
+	 * Use custom dispatcher instead default.
+	 *
+	 * @param  Dispatcher $dispatcher The dispatcher instance.
+	 * @return $this
+	 */
+	public function use_dispatcher( Dispatcher $dispatcher ) {
+		$this->dispatcher = $dispatcher;
+
+		return $this;
+	}
+
+	/**
 	 * Handle the incoming request and process the response.
 	 *
 	 * @param  SymfonyRequest|null $request Optional, the Symfony Request instance.
@@ -112,11 +150,11 @@ class Kernel {
 	 */
 	public function dispatch( $request = null ) {
 		$request  = $this->resolve_request( $request );
-		$pathinfo = '/' . trim( $request->getPathInfo(), '/' );
+		$pathinfo = '/' . trim( $this->request_uri ?: $request->getPathInfo(), '/' );
 
 		try {
-			$routeinfo = $this->create_dispatcher()
-				->dispatch( $request->getMethod(), $pathinfo );
+			$routeinfo = $this->get_dispatcher()
+							  ->dispatch( $request->getMethod(), $pathinfo );
 
 			return $this->handle_dispatcher( $request, $routeinfo );
 		} catch ( \Exception $e ) {
@@ -127,14 +165,7 @@ class Kernel {
 	}
 
 	/**
-	 * Register the request routes.
-	 *
-	 * Use FastRoute syntax to register the route,
-	 *      $route->get('/get-route', 'get_handler');
-	 *      $route->post('/post-route', 'post_handler');
-	 *      $route->addRoute('GET', '/do-something', 'function_handler');
-	 *
-	 * @see https://github.com/nikic/FastRoute#usage
+	 * Register the request routes, subclass must be implement this.
 	 *
 	 * @param \FastRoute\RouteCollector $route The route collector.
 	 */
@@ -145,9 +176,17 @@ class Kernel {
 	 *
 	 * @return \FastRoute\Dispatcher
 	 */
-	protected function create_dispatcher() {
-		return \FastRoute\simpleDispatcher( function ( $route ) {
-			// Call the register routes.
+	protected function get_dispatcher() {
+		return $this->dispatcher ?: \FastRoute\simpleDispatcher( function ( $route ) {
+			/**
+			 * Use FastRoute syntax to register the route:
+			 *
+			 *      $route->get('/get-route', 'get_handler');
+			 *      $route->post('/post-route', 'post_handler');
+			 *      $route->addRoute('GET', '/do-something', 'function_handler');
+			 *
+			 * @see https://github.com/nikic/FastRoute#usage
+			 */
 			$this->register_routes( $route );
 		});
 	}
@@ -187,10 +226,19 @@ class Kernel {
 			$this->resolver->imcomming_request( $request );
 		}
 
-		if ( is_string( $action = $routeinfo[1] ) ) {
-			$response = $this->resolver->call_controller( $action, (array) $routeinfo[2] );
+		if ( method_exists( $request, 'set_route_resolver' ) ) {
+			$request->set_route_resolver(function() {
+				return $this->current_route;
+			});
+		}
+
+		$action = $routeinfo[1];
+		$parameters = method_exists( $request, 'route' ) ? $request->route() : (array) $routeinfo[2];
+
+		if ( is_string( $action ) ) {
+			$response = $this->resolver->call_controller( $action, $parameters );
 		} else {
-			$response = $this->resolver->call( $action, (array) $routeinfo[2] );
+			$response = $this->resolver->call( $action, $parameters );
 		}
 
 		return $this->prepare_response( $response );
@@ -240,7 +288,7 @@ class Kernel {
 		if ( $response instanceof WP_Error ) {
 			$response = new WP_Error_Response( $response );
 		} elseif ( $response instanceof PsrResponseInterface ) {
-			$response = (new HttpFoundationFactory())->createResponse( $response );
+			$response = ( new HttpFoundationFactory )->createResponse( $response );
 		} elseif ( ! $response instanceof SymfonyResponse ) {
 			$response = new Response( $response );
 		}
