@@ -233,7 +233,7 @@ class Kernel {
 		}
 
 		$action = $routeinfo[1];
-		$parameters = method_exists( $request, 'route' ) ? $request->route() : (array) $routeinfo[2];
+		$parameters = method_exists( $request, 'route' ) ? $request->route()[2] : (array) $routeinfo[2];
 
 		if ( is_string( $action ) ) {
 			$response = $this->resolver->call_controller( $action, $parameters );
