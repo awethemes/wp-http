@@ -2,7 +2,6 @@
 namespace Awethemes\Http\Traits;
 
 use Illuminate\Support\Arr;
-use Illuminate\Http\UploadedFile;
 
 trait Request_With_Input {
 	/**
