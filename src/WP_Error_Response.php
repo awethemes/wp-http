@@ -2,8 +2,6 @@
 namespace Awethemes\Http;
 
 class WP_Error_Response extends Response {
-	use Response_Trait;
-
 	/**
 	 * The WP_Error instance.
 	 *
