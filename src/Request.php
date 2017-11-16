@@ -9,6 +9,14 @@ use Illuminate\Contracts\Support\Arrayable;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request as Symfony_Request;
 
+/**
+ * The following methods are derived from code of the Laravel Framework
+ * copyright (c) Taylor Otwell under MIT license.
+ *
+ * @see https://github.com/illuminate/http/blob/5.5/Request.php
+ *
+ * @license https://github.com/laravel/framework/blob/5.5/LICENSE.md
+ */
 class Request extends Symfony_Request implements Arrayable, ArrayAccess {
 	use Traits\Request_With_Input,
 		Traits\Request_With_Flash_Data,
