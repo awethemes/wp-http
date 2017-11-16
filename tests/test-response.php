@@ -1,5 +1,6 @@
 <?php
 
+use Mockery as m;
 use Awethemes\Http\Request;
 use Awethemes\Http\Response;
 use Awethemes\Http\Redirect_Response;
@@ -131,64 +132,10 @@ class Response_Test extends WP_UnitTestCase {
 	public function testSetAndRetrieveStatusCode() {
 		$response = new Response('foo');
 		$response->setStatusCode(404);
+
 		$this->assertSame(404, $response->status());
 		$this->assertSame(404, $response->getStatusCode());
 	}
-
-	/*public function testOnlyInputOnRedirect()
-	{
-		$response = new RedirectResponse('foo.bar');
-		$response->setRequest(Request::create('/', 'GET', ['name' => 'Taylor', 'age' => 26]));
-		$response->setSession($session = m::mock('Illuminate\Session\Store'));
-		$session->shouldReceive('flashInput')->once()->with(['name' => 'Taylor']);
-		$response->onlyInput('name');
-	}
-
-	public function testExceptInputOnRedirect()
-	{
-		$response = new RedirectResponse('foo.bar');
-		$response->setRequest(Request::create('/', 'GET', ['name' => 'Taylor', 'age' => 26]));
-		$response->setSession($session = m::mock('Illuminate\Session\Store'));
-		$session->shouldReceive('flashInput')->once()->with(['name' => 'Taylor']);
-		$response->exceptInput('age');
-	}
-
-	public function testFlashingErrorsOnRedirect()
-	{
-		$response = new RedirectResponse('foo.bar');
-		$response->setRequest(Request::create('/', 'GET', ['name' => 'Taylor', 'age' => 26]));
-		$response->setSession($session = m::mock('Illuminate\Session\Store'));
-		$session->shouldReceive('get')->with('errors', m::type('Illuminate\Support\ViewErrorBag'))->andReturn(new \Illuminate\Support\ViewErrorBag);
-		$session->shouldReceive('flash')->once()->with('errors', m::type('Illuminate\Support\ViewErrorBag'));
-		$provider = m::mock('Illuminate\Contracts\Support\MessageProvider');
-		$provider->shouldReceive('getMessageBag')->once()->andReturn(new \Illuminate\Support\MessageBag);
-		$response->withErrors($provider);
-	}
-
-	public function testSettersGettersOnRequest()
-	{
-		$response = new RedirectResponse('foo.bar');
-		$this->assertNull($response->getRequest());
-		$this->assertNull($response->getSession());
-
-		$request = Request::create('/', 'GET');
-		$session = m::mock('Illuminate\Session\Store');
-		$response->setRequest($request);
-		$response->setSession($session);
-		$this->assertSame($request, $response->getRequest());
-		$this->assertSame($session, $response->getSession());
-	}
-
-	public function testRedirectWithErrorsArrayConvertsToMessageBag()
-	{
-		$response = new RedirectResponse('foo.bar');
-		$response->setRequest(Request::create('/', 'GET', ['name' => 'Taylor', 'age' => 26]));
-		$response->setSession($session = m::mock('Illuminate\Session\Store'));
-		$session->shouldReceive('get')->with('errors', m::type('Illuminate\Support\ViewErrorBag'))->andReturn(new \Illuminate\Support\ViewErrorBag);
-		$session->shouldReceive('flash')->once()->with('errors', m::type('Illuminate\Support\ViewErrorBag'));
-		$provider = ['foo' => 'bar'];
-		$response->withErrors($provider);
-	}*/
 }
 
 class ArrayableStub implements Arrayable {
