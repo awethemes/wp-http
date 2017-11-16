@@ -6,12 +6,9 @@ use Awethemes\Http\Redirect_Response;
 use Symfony\Component\HttpFoundation\Cookie;
 
 class Redirect_Response_Test extends WP_UnitTestCase {
-	public function setUp() {
-		WP_Mock::setUp();
-	}
-
 	public function tearDown() {
-		WP_Mock::tearDown();
+		parent::tearDown();
+		m::close();
 	}
 
 	public function testHeaderOnRedirect() {

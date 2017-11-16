@@ -6,12 +6,9 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 
 class HttpRequestTest extends WP_UnitTestCase {
-	public function setUp() {
-		WP_Mock::setUp();
-	}
-
 	public function tearDown() {
-		WP_Mock::tearDown();
+		parent::tearDown();
+		m::close();
 	}
 
 	public function testInstanceMethod() {

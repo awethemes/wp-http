@@ -28,8 +28,8 @@
         "awethemes/wp-session": "dev-master"
     },
     "require-dev": {
-        "10up/wp_mock": "^0.2.0",
-        "symfony/debug": "^2.0|^3.0"
+        "symfony/debug": "^2.0|^3.0",
+        "mockery/mockery": "^0.9"
     },
     "suggest": {
         "symfony/debug": "Better debug on your code.",

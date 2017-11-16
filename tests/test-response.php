@@ -9,12 +9,9 @@ use Illuminate\Contracts\Support\Arrayable;
 use Symfony\Component\HttpFoundation\Cookie;
 
 class Response_Test extends WP_UnitTestCase {
-	public function setUp() {
-		WP_Mock::setUp();
-	}
-
 	public function tearDown() {
-		WP_Mock::tearDown();
+		parent::tearDown();
+		m::close();
 	}
 
 	public function testJsonResponsesAreConvertedAndHeadersAreSet() {
