@@ -272,7 +272,7 @@ class Kernel {
 	 */
 	protected function resolve_request( $request ) {
 		if ( ! $request instanceof SymfonyRequest ) {
-			$request = Request::createFromGlobals();
+			$request = Request::capture();
 		}
 
 		return $request;
