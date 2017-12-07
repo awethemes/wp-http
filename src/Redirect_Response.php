@@ -3,11 +3,13 @@ namespace Awethemes\Http;
 
 use RuntimeException;
 use Awethemes\WP_Session\Session;
+use Illuminate\Support\Traits\Macroable;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RedirectResponse as Symfony_Redirect_Response;
 
 class Redirect_Response extends Symfony_Redirect_Response {
-	use Response_Trait;
+	use Response_Trait,
+		Macroable;
 
 	/**
 	 * The request instance.
