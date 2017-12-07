@@ -1,5 +1,5 @@
 <?php
-namespace Awethemes\Http;
+namespace Awethemes\Http\Resolver;
 
 interface Resolver {
 	/**

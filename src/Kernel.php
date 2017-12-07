@@ -4,6 +4,8 @@ namespace Awethemes\Http;
 use WP_Error;
 use FastRoute\Dispatcher;
 use Psr\Log\LoggerInterface;
+use Awethemes\Http\Resolver\Resolver;
+use Awethemes\Http\Resolver\Simple_Resolver;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
@@ -61,7 +63,7 @@ class Kernel {
 	 * @param Resolver $resolver The Resolver implementation.
 	 */
 	public function __construct( Resolver $resolver = null ) {
-		$this->resolver = $resolver ?: new Resolver\Simple_Resolver;
+		$this->resolver = $resolver ?: new Simple_Resolver;
 	}
 
 	/**

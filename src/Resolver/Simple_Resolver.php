@@ -1,7 +1,6 @@
 <?php
 namespace Awethemes\Http\Resolver;
 
-use Awethemes\Http\Resolver;
 use Symfony\Component\HttpFoundation\Request;
 
 class Simple_Resolver implements Resolver {
