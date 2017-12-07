@@ -30,10 +30,10 @@ class Redirect_Response extends Symfony_Redirect_Response {
 	 *
 	 * @param string $url           The URL to redirect to.
 	 * @param int    $status        The status code (302 by default).
-	 * @param bool   $safe_redirect Use safe redirect or not.
 	 * @param array  $headers       The headers (Location is always set to the given URL).
+	 * @param bool   $safe_redirect Use safe redirect or not.
 	 */
-	public function __construct( $url, $status = 302, $safe_redirect = false, $headers = [] ) {
+	public function __construct( $url, $status = 302, $headers = [], $safe_redirect = false ) {
 		$url = wp_sanitize_redirect( $url );
 
 		$url = $safe_redirect ? $url : wp_validate_redirect( $url );
