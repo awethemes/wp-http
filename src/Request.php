@@ -5,6 +5,7 @@ use Closure;
 use ArrayAccess;
 use RuntimeException;
 use Awethemes\WP_Session\Session;
+use Illuminate\Support\Traits\Macroable;
 use Illuminate\Contracts\Support\Arrayable;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request as Symfony_Request;
@@ -20,7 +21,8 @@ use Symfony\Component\HttpFoundation\Request as Symfony_Request;
 class Request extends Symfony_Request implements Arrayable, ArrayAccess {
 	use Traits\Request_With_Input,
 		Traits\Request_With_Flash_Data,
-		Traits\Request_With_Content_Types;
+		Traits\Request_With_Content_Types,
+		Macroable;
 
 	/**
 	 * The decoded JSON content for the request.
@@ -248,7 +250,7 @@ class Request extends Symfony_Request implements Arrayable, ArrayAccess {
 	 * @param  \Awethemes\WP_Session\Session $session The session store implementation.
 	 * @return void
 	 */
-	public function set_wp_Session( Session $session ) {
+	public function set_wp_session( Session $session ) {
 		$this->session = $session;
 	}
 
