@@ -10,6 +10,6 @@ class AccessDeniedHttpException extends ForbiddenException {
 	 * @param integer    $code      The internal exception code.
 	 */
 	public function __construct( $message = 'Access Denied', \Exception $previous = null, $code = 0 ) {
-		parent::__construct( 403, $message, $previous, [], $code );
+		parent::__construct( $message, $previous, $code );
 	}
 }
