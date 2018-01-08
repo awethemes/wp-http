@@ -11,6 +11,17 @@ class Response extends Symfony_Response {
 	use Response_Trait;
 
 	/**
+	 * {@inheritdoc}
+	 */
+	public function send() {
+		$this->sendHeaders();
+
+		$this->sendContent();
+
+		return $this;
+	}
+
+	/**
 	 * Set the content on the response.
 	 *
 	 * Overwrite: \Symfony\Component\HttpFoundation\Response::setContent()
