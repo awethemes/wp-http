@@ -151,12 +151,12 @@ class Kernel {
 	 * @return Response
 	 */
 	public function dispatch( $request = null ) {
-		$request  = $this->resolve_request( $request );
-		$pathinfo = '/' . trim( $this->request_uri ?: $request->getPathInfo(), '/' );
-
 		try {
-			$routeinfo = $this->get_dispatcher()
-							  ->dispatch( $request->getMethod(), $pathinfo );
+			$request = $this->resolve_request( $request );
+
+			$routeinfo = $this->get_dispatcher()->dispatch(
+				$request->getMethod(), $this->get_dispatch_request_uri( $request )
+			);
 
 			return $this->handle_dispatcher( $request, $routeinfo );
 		} catch ( \Exception $e ) {
@@ -169,6 +169,10 @@ class Kernel {
 	/**
 	 * Register the request routes, subclass must be implement this.
 	 *
+	 *      $route->get('/get-route', 'get_handler');
+	 *      $route->post('/post-route', 'post_handler');
+	 *      $route->addRoute('GET', '/do-something', 'function_handler');
+	 *
 	 * @param \FastRoute\RouteCollector $route The route collector.
 	 */
 	protected function register_routes( $route ) {}
@@ -179,18 +183,23 @@ class Kernel {
 	 * @return \FastRoute\Dispatcher
 	 */
 	protected function get_dispatcher() {
-		return $this->dispatcher ?: \FastRoute\simpleDispatcher( function ( $route ) {
-			/**
-			 * Use FastRoute syntax to register the route:
-			 *
-			 *      $route->get('/get-route', 'get_handler');
-			 *      $route->post('/post-route', 'post_handler');
-			 *      $route->addRoute('GET', '/do-something', 'function_handler');
-			 *
-			 * @see https://github.com/nikic/FastRoute#usage
-			 */
-			$this->register_routes( $route );
-		});
+		if ( null === $this->dispatcher ) {
+			$this->dispatcher = \FastRoute\simpleDispatcher( function ( $route ) {
+				$this->register_routes( $route );
+			});
+		}
+
+		return $this->dispatcher;
+	}
+
+	/**
+	 * Get request uri for the dispatcher.
+	 *
+	 * @param  SymfonyRequest $request The incoming request.
+	 * @return string
+	 */
+	protected function get_dispatch_request_uri( SymfonyRequest $request ) {
+		return '/' . trim( $this->request_uri ?: $request->getPathInfo(), '/' );
 	}
 
 	/**
@@ -223,6 +232,9 @@ class Kernel {
 	 */
 	protected function handle_found_route( SymfonyRequest $request, array $routeinfo ) {
 		$this->current_route = $routeinfo;
+
+		// Set the current route pathinfo.
+		$this->current_route[3] = $this->get_dispatch_request_uri( $request );
 
 		if ( method_exists( $this->resolver, 'imcomming_request' ) ) {
 			$this->resolver->imcomming_request( $request );
