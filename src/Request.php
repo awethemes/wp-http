@@ -90,7 +90,7 @@ class Request extends Symfony_Request implements Arrayable, ArrayAccess {
 	 *
 	 * @return string
 	 */
-	public function get_full_url() {
+	public function full_url() {
 		$query = $this->getQueryString();
 
 		$question = ( $this->getBaseUrl() . $this->getPathInfo() ) == '/' ? '/?' : '?';
@@ -208,8 +208,6 @@ class Request extends Symfony_Request implements Arrayable, ArrayAccess {
 	/**
 	 * Get the route handling the request.
 	 *
-	 * Note: Support only for the FastRoute route engine.
-	 *
 	 * @param  string|null $param Optional, get the special route parameter.
 	 * @return array|string|null
 	 */
@@ -221,6 +219,17 @@ class Request extends Symfony_Request implements Arrayable, ArrayAccess {
 		}
 
 		return array_key_exists( $param, $route[2] ) ? $route[2][ $param ] : null;
+	}
+
+	/**
+	 * Get the current route pathinfo (e.g: /example).
+	 *
+	 * @return string
+	 */
+	public function route_path() {
+		$current_route = $this->route();
+
+		return isset( $current_route[3] ) ? $current_route[3] : null;
 	}
 
 	/**
