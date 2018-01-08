@@ -62,16 +62,16 @@ class HttpRequestTest extends WP_UnitTestCase {
 
 	public function testFullUrlMethod() {
 		$request = Request::create( 'http://foo.com/foo/bar?name=taylor', 'GET' );
-		$this->assertEquals( 'http://foo.com/foo/bar?name=taylor', $request->get_full_url() );
+		$this->assertEquals( 'http://foo.com/foo/bar?name=taylor', $request->full_url() );
 
 		$request = Request::create( 'https://foo.com', 'GET' );
-		$this->assertEquals( 'https://foo.com', $request->get_full_url() );
+		$this->assertEquals( 'https://foo.com', $request->full_url() );
 
 		// $request = Request::create( 'https://foo.com', 'GET' );
 		// $this->assertEquals( 'https://foo.com/?coupon=foo', $request->fullUrlWithQuery( [ 'coupon' => 'foo' ] ) );
 
 		$request = Request::create( 'https://foo.com?a=b', 'GET' );
-		$this->assertEquals( 'https://foo.com/?a=b', $request->get_full_url() );
+		$this->assertEquals( 'https://foo.com/?a=b', $request->full_url() );
 
 		// $request = Request::create( 'https://foo.com?a=b', 'GET' );
 		// $this->assertEquals( 'https://foo.com/?a=b&coupon=foo', $request->fullUrlWithQuery( [ 'coupon' => 'foo' ] ) );
