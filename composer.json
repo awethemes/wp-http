@@ -23,12 +23,12 @@
         "php": ">=5.6.4",
         "mpociot/pipeline": "^1.0",
         "nikic/fast-route": "^1.2",
-        "symfony/http-foundation": "^2.0|^3.0",
+        "symfony/http-foundation": "^2.0|^3.3",
         "tightenco/collect": "5.4.*",
         "awethemes/wp-session": "dev-master"
     },
     "require-dev": {
-        "symfony/debug": "^2.0|^3.0",
+        "symfony/debug": "^2.0|^3.3",
         "mockery/mockery": "^0.9"
     },
     "suggest": {
