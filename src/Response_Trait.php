@@ -79,6 +79,29 @@ trait Response_Trait {
 	}
 
 	/**
+	 * Set the headers to prevent caching for the different browsers.
+	 *
+	 * @return $this
+	 */
+	public function no_cache() {
+		nocache_headers();
+
+		if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+			define( 'DONOTCACHEPAGE', 'true' );
+		}
+
+		if ( ! defined( 'DONOTCACHEOBJECT' ) ) {
+			define( 'DONOTCACHEOBJECT', 'true' );
+		}
+
+		if ( ! defined( 'DONOTCACHEDB' ) ) {
+			define( 'DONOTCACHEDB', 'true' );
+		}
+
+		return $this;
+	}
+
+	/**
 	 * Add a cookie to the response, alias of $this->with_cookie() method.
 	 *
 	 * @param  Cookie|mixed $cookie The Cookie instance or cookie name.
