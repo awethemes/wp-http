@@ -8,6 +8,7 @@ use Awethemes\Http\Resolver\Resolver;
 use Awethemes\Http\Resolver\Simple_Resolver;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
 use Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
@@ -305,6 +306,8 @@ class Kernel {
 			$response = ( new HttpFoundationFactory )->createResponse( $response );
 		} elseif ( ! $response instanceof SymfonyResponse ) {
 			$response = new Response( $response );
+		} elseif ( $response instanceof BinaryFileResponse ) {
+			$response = $response->prepare( Request::capture() );
 		}
 
 		return $response;
