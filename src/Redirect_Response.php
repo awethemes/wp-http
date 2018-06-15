@@ -36,7 +36,7 @@ class Redirect_Response extends Symfony_Redirect_Response {
 	public function __construct( $url, $status = 302, $headers = [], $safe_redirect = false ) {
 		$url = wp_sanitize_redirect( $url );
 
-		$url = $safe_redirect ? $url : wp_validate_redirect( $url );
+		$url = ! $safe_redirect ? $url : wp_validate_redirect( $url );
 
 		parent::__construct( $url, $status, $headers );
 	}
