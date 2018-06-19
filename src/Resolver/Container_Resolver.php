@@ -21,6 +21,16 @@ class Container_Resolver extends Simple_Resolver {
 	}
 
 	/**
+	 * Make a instance of given class.
+	 *
+	 * @param  string $class The class name.
+	 * @return mixed
+	 */
+	public function make( $class ) {
+		return $this->container->make( $class );
+	}
+
+	/**
 	 * Call to the closure/callable action.
 	 *
 	 * @param  callable $action     The callable of the action.
@@ -29,15 +39,5 @@ class Container_Resolver extends Simple_Resolver {
 	 */
 	public function call( callable $action, array $parameters ) {
 		return $this->container->call( $action, $parameters );
-	}
-
-	/**
-	 * Resolve controller class.
-	 *
-	 * @param  string $class The class name.
-	 * @return mixed
-	 */
-	protected function resolve_controller_class( $class ) {
-		return $this->container->make( $class );
 	}
 }

@@ -3,6 +3,15 @@ namespace Awethemes\Http\Resolver;
 
 interface Resolver {
 	/**
+	 * Make a instance of given class.
+	 *
+	 * @param  string $class The class name.
+	 *
+	 * @return mixed
+	 */
+	public function make( $class );
+
+	/**
 	 * Call to the closure/callable action.
 	 *
 	 * @param  callable $action     The callable of the action.

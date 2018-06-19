@@ -5,7 +5,7 @@ class WP_Error_Response extends Response {
 	/**
 	 * The WP_Error instance.
 	 *
-	 * @var WP_Error
+	 * @var \WP_Error
 	 */
 	protected $wp_error;
 
@@ -32,7 +32,7 @@ class WP_Error_Response extends Response {
 	/**
 	 * Get the WP_Error instance.
 	 *
-	 * @return WP_Error
+	 * @return \WP_Error
 	 */
 	public function get_wp_error() {
 		return $this->wp_error;

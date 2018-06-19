@@ -1,6 +1,7 @@
 <?php
 namespace Awethemes\Http;
 
+use Closure;
 use WP_Error;
 use FastRoute\Dispatcher;
 use Psr\Log\LoggerInterface;
@@ -45,6 +46,13 @@ class Kernel {
 	protected $dispatcher;
 
 	/**
+	 * The router callback.
+	 *
+	 * @var \Closure
+	 */
+	protected $router_callback;
+
+	/**
 	 * The current route being dispatched.
 	 *
 	 * @var array
@@ -65,6 +73,17 @@ class Kernel {
 	 */
 	public function __construct( Resolver $resolver = null ) {
 		$this->resolver = $resolver ?: new Simple_Resolver;
+	}
+
+	/**
+	 * Set the router callback.
+	 *
+	 * @param \Closure $callback The router callback.
+	 */
+	public function router( Closure $callback ) {
+		$this->router_callback = $callback;
+
+		return $this;
 	}
 
 	/**
@@ -128,6 +147,22 @@ class Kernel {
 	}
 
 	/**
+	 * Add new middleware to the application.
+	 *
+	 * @param  \Closure|array $middleware The middleware.
+	 * @return $this
+	 */
+	public function middleware( $middleware ) {
+		if ( ! is_array( $middleware ) ) {
+			$middleware = [ $middleware ];
+		}
+
+		$this->middleware = array_unique( array_merge( $this->middleware, $middleware ) );
+
+		return $this;
+	}
+
+	/**
 	 * Handle the incoming request and process the response.
 	 *
 	 * @param  SymfonyRequest|null $request Optional, the Symfony Request instance.
@@ -155,11 +190,13 @@ class Kernel {
 		try {
 			$request = $this->resolve_request( $request );
 
-			$routeinfo = $this->get_dispatcher()->dispatch(
-				$request->getMethod(), $this->get_dispatch_request_uri( $request )
-			);
+			return $this->send_through_pipeline( $request, $this->middleware, function () use ( $request ) {
+				$routeinfo = $this->get_dispatcher()->dispatch(
+					$request->getMethod(), $this->get_dispatch_request_uri( $request )
+				);
 
-			return $this->handle_dispatcher( $request, $routeinfo );
+				return $this->handle_dispatcher( $request, $routeinfo );
+			});
 		} catch ( \Exception $e ) {
 			return $this->handler_exception( $e );
 		} catch ( \Throwable $e ) {
@@ -176,7 +213,11 @@ class Kernel {
 	 *
 	 * @param \FastRoute\RouteCollector $route The route collector.
 	 */
-	protected function register_routes( $route ) {}
+	protected function register_routes( $route ) {
+		if ( $this->router_callback ) {
+			call_user_func( $this->router_callback, $route );
+		}
+	}
 
 	/**
 	 * Create a FastRoute dispatcher.
@@ -283,7 +324,7 @@ class Kernel {
 	 * Resolve the request.
 	 *
 	 * @param  mixed $request The request instance.
-	 * @return Request
+	 * @return \Symfony\Component\HttpFoundation\Request
 	 */
 	protected function resolve_request( $request ) {
 		if ( ! $request instanceof SymfonyRequest ) {
@@ -291,6 +332,34 @@ class Kernel {
 		}
 
 		return $request;
+	}
+
+	/**
+	 * Send the request through the pipeline with the given callback.
+	 *
+	 * @param  SymfonyRequest $request    The incoming request.
+	 * @param  array          $middleware The middleware.
+	 * @param  \Closure       $then       The final destination callback.
+	 * @return mixed
+	 */
+	protected function send_through_pipeline( SymfonyRequest $request, array $middleware, Closure $then ) {
+		if ( count( $middleware ) > 0 && ! $this->should_skip_middleware() ) {
+			return ( new Pipeline( $this->get_resolver() ) )
+				->send( $request )
+				->through( $middleware )
+				->then( $then );
+		}
+
+		return $then();
+	}
+
+	/**
+	 * Determines whether middleware should be skipped during request.
+	 *
+	 * @return bool
+	 */
+	protected function should_skip_middleware() {
+		return false;
 	}
 
 	/**

@@ -145,7 +145,7 @@ class Redirect_Response extends Symfony_Redirect_Response {
 	/**
 	 * Get the session store implementation.
 	 *
-	 * @return \Awethemes\Session\Session|null
+	 * @return \Awethemes\WP_Session\Session|null
 	 *
 	 * @throws RuntimeException
 	 */
@@ -160,7 +160,7 @@ class Redirect_Response extends Symfony_Redirect_Response {
 	/**
 	 * Set the session store implementation.
 	 *
-	 * @param  \Awethemes\Session\Session $session The session store instance.
+	 * @param  \Awethemes\WP_Session\Session $session The session store instance.
 	 * @return void
 	 */
 	public function set_session( Session $session ) {

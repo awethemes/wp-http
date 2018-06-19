@@ -46,7 +46,7 @@ trait Request_With_Input {
 	public function bearer_token() {
 		$header = $this->header( 'Authorization', '' );
 
-		if ( '' !== $header && 'Bearer ' === substr( $header, 0, 7 ) ) {
+		if ( '' !== $header && 0 === substr( $header, 'Bearer ' ) ) {
 			return substr( $header, 7 );
 		}
 	}
