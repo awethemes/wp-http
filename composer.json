@@ -20,18 +20,15 @@
         }
     },
     "require": {
-        "php": ">=5.6.4",
-        "nikic/fast-route": "^1.2",
+        "php": ">=5.5.9",
         "symfony/http-foundation": "^2.0|3.3.*",
-        "tightenco/collect": "5.4.*",
-        "awethemes/wp-session": "^1.0"
+        "tightenco/collect": "5.4.*"
     },
     "require-dev": {
         "symfony/debug": "^2.0|^3.3",
         "mockery/mockery": "^0.9"
     },
     "suggest": {
-        "symfony/debug": "Better debug on your code.",
-        "monolog/monolog": "Allows more advanced logging of the application flow."
+        "awethemes/wp-session": "^1.0"
     }
 }
