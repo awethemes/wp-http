@@ -22,7 +22,7 @@
     "require": {
         "php": ">=5.5.9",
         "symfony/http-foundation": "^2.0|3.3.*",
-        "tightenco/collect": "5.4.*"
+        "tightenco/collect": "5.2.*|5.3.*|5.4.*"
     },
     "require-dev": {
         "awethemes/wp-session": "^1.0",
