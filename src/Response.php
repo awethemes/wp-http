@@ -66,7 +66,9 @@ class Response extends Symfony_Response {
 	protected function prepare_json_content( $content ) {
 		if ( $content instanceof Jsonable ) {
 			return $content->toJson();
-		} elseif ( $content instanceof Arrayable ) {
+		}
+
+		if ( $content instanceof Arrayable ) {
 			return json_encode( $content->toArray() );
 		}
 

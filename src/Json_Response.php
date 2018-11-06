@@ -76,8 +76,7 @@ class Json_Response extends Symfony_Json_Response {
 	 * @return bool
 	 */
 	protected function has_valid_json( $json_error ) {
-		return JSON_ERROR_NONE === $json_error ||
-			   ( JSON_ERROR_UNSUPPORTED_TYPE === $json_error && $this->has_encoding_option( JSON_PARTIAL_OUTPUT_ON_ERROR ) );
+		return JSON_ERROR_NONE === $json_error || ( JSON_ERROR_UNSUPPORTED_TYPE === $json_error && $this->has_encoding_option( JSON_PARTIAL_OUTPUT_ON_ERROR ) );
 	}
 
 	/**

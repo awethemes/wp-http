@@ -49,6 +49,8 @@ trait Request_With_Input {
 		if ( '' !== $header && 0 === substr( $header, 'Bearer ' ) ) {
 			return substr( $header, 7 );
 		}
+
+		return null;
 	}
 
 	/**

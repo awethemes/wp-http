@@ -93,7 +93,7 @@ class Request extends Symfony_Request implements Arrayable, ArrayAccess {
 	public function full_url() {
 		$query = $this->getQueryString();
 
-		$question = ( $this->getBaseUrl() . $this->getPathInfo() ) == '/' ? '/?' : '?';
+		$question = ( $this->getBaseUrl() . $this->getPathInfo() ) === '/' ? '/?' : '?';
 
 		return $query ? ( $this->url() . $question . $query ) : $this->url();
 	}
@@ -180,7 +180,7 @@ class Request extends Symfony_Request implements Arrayable, ArrayAccess {
 	 * @return ParameterBag|mixed
 	 */
 	public function json( $key = null, $default = null ) {
-		if ( ! isset( $this->json ) ) {
+		if ( null === $this->json ) {
 			$this->json = new ParameterBag( (array) json_decode( $this->getContent(), true ) );
 		}
 
@@ -292,8 +292,12 @@ class Request extends Symfony_Request implements Arrayable, ArrayAccess {
 		$content = $request->content;
 
 		$request = ( new static )->duplicate(
-			$request->query->all(), $request->request->all(), $request->attributes->all(),
-			$request->cookies->all(), $request->files->all(), $request->server->all()
+			$request->query->all(),
+			$request->request->all(),
+			$request->attributes->all(),
+			$request->cookies->all(),
+			$request->files->all(),
+			$request->server->all()
 		);
 
 		$request->content = $content;
@@ -310,7 +314,7 @@ class Request extends Symfony_Request implements Arrayable, ArrayAccess {
 	 */
 	protected function filter_files( $files ) {
 		if ( ! $files ) {
-			return;
+			return null;
 		}
 
 		foreach ( $files as $key => $file ) {
@@ -336,7 +340,7 @@ class Request extends Symfony_Request implements Arrayable, ArrayAccess {
 			return $this->json();
 		}
 
-		return $this->getRealMethod() == 'GET' ? $this->query : $this->request;
+		return 'GET' === $this->getRealMethod() ? $this->query : $this->request;
 	}
 
 	/**
