@@ -25,10 +25,11 @@
         "tightenco/collect": "5.4.*"
     },
     "require-dev": {
+        "awethemes/wp-session": "^1.0",
         "symfony/debug": "^2.0|^3.3",
         "mockery/mockery": "^0.9"
     },
     "suggest": {
-        "awethemes/wp-session": "^1.0"
+        "awethemes/wp-session": "Missing session handler for WordPress"
     }
 }
