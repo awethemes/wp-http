@@ -25,7 +25,7 @@
         "tightenco/collect": "5.2.*|5.3.*|5.4.*"
     },
     "require-dev": {
-        "awethemes/wp-session": "^1.0",
+        "awethemes/wp-session": "^1.1",
         "symfony/debug": "^2.0|^3.3",
         "mockery/mockery": "^0.9"
     },
